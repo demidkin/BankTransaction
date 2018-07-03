@@ -1,0 +1,10 @@
+@mixin myborder($color) {
+    background: $color;
+    border: 1px solid darkgrey;
+}
+
+h1 {
+    color: white;
+    @include myborder(red);
+}
+
