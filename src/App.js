@@ -1,6 +1,16 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { BrowserRouter as Router, Route } from "react-router-dom";
+import { withRouter } from 'react-router-dom';
+
+import Login from './components/login.component';
+import Navigation from './components/navigation.component';
+import Transactions from './components/transactions.component';
+import TransactionAdd from './components/transaction-add.component'
+import Signup from './components/signup.component';
+
 import './main.scss';
+
 
 
 class App extends React.Component {
@@ -29,7 +39,17 @@ class App extends React.Component {
     }
 
     render() {
-       return (<h1>Welcome to React</h1>)
+        return (
+                <Router>
+                    <div>
+                        <Navigation />
+                        <Route path="/login" component={Login}/>
+                        <Route path="/transactions" component={Transactions}/>
+                        <Route path="/add-transaction" component={TransactionAdd}/>
+                        <Route path="/signup" component={Signup}/>
+                    </div>
+                </Router>    
+        )
     }
 }
 

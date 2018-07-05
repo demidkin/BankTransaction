@@ -1,0 +1,38 @@
+.signup {
+    width: 330px;
+    height: 140px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 100px;
+
+    fieldset {
+        width: 300px;
+        background: lightgrey;
+    }
+
+    legend{
+        color: red;
+    }
+
+    input {
+        margin-top: 10px;
+        margin-left: 10px;
+        clear: right;
+        float: right;
+
+    }
+    
+    label {
+        margin-top: 10px;
+        margin-left: 10px;
+        float: left;
+        clear: both;
+    }
+    span{
+        margin-top: 10px;
+        margin-left: 10px;
+        color: red;
+        clear: left;
+        float: left;
+    }
+}
