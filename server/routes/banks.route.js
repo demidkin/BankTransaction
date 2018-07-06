@@ -8,10 +8,10 @@ let router = express.Router();
 function validatorInput(data) {
     let errors = {};
 
-    if (data.userId === undefined || Validator.isEmpty(data.userId)){
+    if (data.userId === undefined || Validator.isEmpty(data.userId + '')){
         errors.userId = 'UserId is required';
     }
-    if (data.token === undefined || Validator.isEmpty(data.token)){
+    if (data.token === undefined || Validator.isEmpty(data.token + '')){
         errors.token = 'Token is required';
     }
     return { errors, isValid: isEmpty(errors)};

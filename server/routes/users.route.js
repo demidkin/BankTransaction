@@ -8,13 +8,13 @@ let router = express.Router();
 function validatorInput(data) {
     let errors = {};
 
-    if (data.email === undefined || Validator.isEmpty(data.email)){
+    if (data.email === undefined || Validator.isEmpty(data.email + '')){
         errors.email = 'Email is required';
     }
-    else if (!Validator.isEmail(data.email)){
+    else if (!Validator.isEmail(data.email + '')){
         errors.email = 'Email is invalid';
     }
-    if (data.password === undefined || Validator.isEmpty(data.password)){
+    if (data.password === undefined || Validator.isEmpty(data.password + '')){
         errors.password = 'Password is required';
     }
     return { errors, isValid: isEmpty(errors)};

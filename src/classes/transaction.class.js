@@ -1,7 +1,7 @@
 export default class Transaction {
-    constructor(id, amount, bankId){
+    constructor(id, ammount, bankId){
         this.id = id;
-        this.amount = amount;
+        this.ammount = ammount;
         this.bankId = bankId;
     }
 }

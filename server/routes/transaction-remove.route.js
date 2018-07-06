@@ -9,13 +9,13 @@ let router = express.Router();
 function validatorInput(data) {
     let errors = {};
 
-    if (data.userId === undefined || Validator.isEmpty(data.userId)){
+    if (data.userId === undefined || Validator.isEmpty(data.userId + '')){
         errors.userId = 'UserId is required';
     }
-    if (data.token === undefined || Validator.isEmpty(data.token)){
+    if (data.token === undefined || Validator.isEmpty(data.token + '')){
         errors.token = 'Token is required';
     }
-    if (data.transactionsId === undefined || Validator.isEmpty(data.transactionsId)){
+    if (data.transactionsId === undefined || Validator.isEmpty(data.transactionsId + '')){
         errors.transactionsId = 'TransactionsId is required';
     }
     const transaction = transactions.find(t => t.id === data.transactionsId);

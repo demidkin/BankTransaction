@@ -29,7 +29,6 @@ class Login extends React.Component {
         .then(
             (res) => {
                 this.setState({token : res.data.token})
-                console.log(this.state.token)
                 this.props.saveToken({ userid: this.state.email, token: this.state.token });
                 this.props.history.push('/');
             },
@@ -39,9 +38,6 @@ class Login extends React.Component {
 
     render(){
         const { errors } = this.state;
-
-
-        console.log(this.props.tokenStore.tokenStore[0].token);
 
         return (
             <form className="login" onSubmit={this.onSubmit}>
@@ -64,4 +60,4 @@ class Login extends React.Component {
 
 
 
-export default connect( state => ({ tokenStore: state }), { auth, saveToken })(Login);
+export default connect( null, { auth, saveToken })(Login);

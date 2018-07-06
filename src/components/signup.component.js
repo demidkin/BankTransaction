@@ -56,4 +56,4 @@ class Signup extends React.Component {
 
 
 
-export default connect( (state) => ({ signupReducer: state }), { userSignupRequest })(Signup);
+export default connect( null, { userSignupRequest })(Signup);

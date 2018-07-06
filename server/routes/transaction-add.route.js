@@ -8,16 +8,16 @@ let router = express.Router();
 function validatorInput(data) {
     let errors = {};
 
-    if (data.userId === undefined || Validator.isEmpty(data.userId)){
+    if (data.userId === undefined || Validator.isEmpty(data.userId + '')){
         errors.userId = 'UserId is required';
     }
-    if (data.token === undefined || Validator.isEmpty(data.token)){
+    if (data.token === undefined || Validator.isEmpty(data.token + '')){
         errors.token = 'Token is required';
     }
-    if (data.ammount === undefined || Validator.isEmpty(data.ammount)){
+    if (data.ammount === undefined || Validator.isEmpty(data.ammount + '')){
         errors.ammount = 'Ammount is required';
     }
-    if (data.bankId === undefined || Validator.isEmpty(data.bankId)){
+    if (data.bankId === undefined || Validator.isEmpty(data.bankId + '')){
         errors.bankId = 'Bank is required';
     }
     if (Validator.isNumeric(data.ammount)){

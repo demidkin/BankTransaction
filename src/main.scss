@@ -7,4 +7,6 @@ h1 {
     color: white;
     @include myborder(blue);
 }
-
+body{
+    font-family: 'Times New Roman', Times, serif;
+}
