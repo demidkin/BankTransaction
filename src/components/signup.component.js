@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux'
-import { userSignupRequest } from '../actions/signup.actions'
+import { userSignupRequest } from '../actions/signup.action'
 import '../sass/signup.component.scss'
 
 
@@ -25,7 +25,9 @@ class Signup extends React.Component {
         e.preventDefault();
         this.props.userSignupRequest(this.state)
         .then(
-            () => {},
+            () => {
+                this.props.history.push('/login');
+            },
             (erorr) => this.setState({errors: erorr.response.data, isLoading: false})
         );
     }
@@ -38,7 +40,7 @@ class Signup extends React.Component {
                 <fieldset>
                     <legend>Sign up</legend>
                     <label htmlFor="login-input">Email: </label>
-                    <input type="text" id="login-input" name="email" onChange={this.onChange}/>
+                    <input type="email" id="login-input" name="email" onChange={this.onChange}/>
                     <label htmlFor="pasword-input">Password: </label>
                     <input type="password" id="pasword-input" name="password" onChange={this.onChange} /> 
                     <input type="submit" value="Sign up" name="" disabled={this.state.isLoading}/>
@@ -52,8 +54,6 @@ class Signup extends React.Component {
     } 
 }
 
-// Signup.propTypes = {
-//     userSignupRequest = React.PropTypes.func.isRequired
-// }
+
 
 export default connect( (state) => ({ signupReducer: state }), { userSignupRequest })(Signup);

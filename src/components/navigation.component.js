@@ -10,10 +10,12 @@ class Navigation extends React.Component {
             <nav className="navigation">
                 <ul>
                     <li><Link to="/">Home</Link></li>
-                    <li><Link to="/login">Login</Link></li>
                     <li><Link to="/transactions">Transactions</Link></li>
                     <li><Link to="/add-transaction">Add transaction</Link></li>
                     <li><Link to="/Signup">Sign up</Link></li>
+                    <li><Link to="/login">Login</Link></li>
+                    <li><Link to="/logout">Logout...</Link></li>
+                    
                 </ul>
             </nav>
         );

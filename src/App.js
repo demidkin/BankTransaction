@@ -1,7 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { BrowserRouter as Router, Route } from "react-router-dom";
-import { withRouter } from 'react-router-dom';
+import { browserHistory } from 'react-router'
+
+import { loadToken } from './actions/loadToken.action'
 
 import Login from './components/login.component';
 import Navigation from './components/navigation.component';
@@ -20,6 +22,7 @@ class App extends React.Component {
         this.state = {
         
         }
+        this.props.loadToken();
     }
 
 
@@ -38,24 +41,24 @@ class App extends React.Component {
 
     }
 
+    redirect(){
+        this.props.history.push('/');
+    }
+
     render() {
         return (
-                <Router>
+                <Router history={browserHistory}>
                     <div>
                         <Navigation />
-                        <Route path="/login" component={Login}/>
-                        <Route path="/transactions" component={Transactions}/>
-                        <Route path="/add-transaction" component={TransactionAdd}/>
-                        <Route path="/signup" component={Signup}/>
+                        {/* <Route exac path="/" component={}/> */}
+                        <Route path="/login" component={Login} />
+                        <Route path='/transactions' component={Transactions} />
+                        <Route path="/add-transaction" component={TransactionAdd} />
+                        <Route path="/signup" component={Signup} />
                     </div>
                 </Router>    
         )
     }
 }
 
-export default connect(
-        state => ({
-        }),
-        dispatch => ({
-        })
-    )(App);
+export default connect( state => ({ tokenStore: state }), { loadToken })(App);
