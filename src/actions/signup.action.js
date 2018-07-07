@@ -1,7 +1,7 @@
-import axios from 'axios'
+import { post } from './ajax';
 
 export function userSignupRequest (userData) {
     return dispatch => {
-        return axios.post('http://localhost:3000/api/users', userData);
+        return post('http://localhost:3000/api/users', userData);
     }
 }

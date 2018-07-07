@@ -1,7 +1,7 @@
 import express from 'express';
 import Validator from 'validator';
 import isEmpty from 'lodash/isEmpty';
-import { tokens, transactions, transactionIndex } from '../data';
+import { tokens, transactions, removeTransaction } from '../data';
 import Transaction from '../../src/classes/transaction.class';
 
 let router = express.Router();
@@ -15,10 +15,11 @@ function validatorInput(data) {
     if (data.token === undefined || Validator.isEmpty(data.token + '')){
         errors.token = 'Token is required';
     }
-    if (data.transactionsId === undefined || Validator.isEmpty(data.transactionsId + '')){
-        errors.transactionsId = 'TransactionsId is required';
+    if (data.transactionId === undefined || Validator.isEmpty(data.transactionId + '')){
+        errors.transactionId = 'TransactionsId is required';
     }
-    const transaction = transactions.find(t => t.id === data.transactionsId);
+    const transaction = transactions.find(t => t.id === parseInt(data.transactionId));
+    console.log('transactionId: ',data.transactionId)
     if (transaction === undefined){
         errors.bankId = 'Unknown transaction';
     }
@@ -30,10 +31,10 @@ function validatorInput(data) {
 router.post('/', (req, res) => {
     const { errors, isValid } = validatorInput(req.body);
     if (isValid) {
-        const { userId, token, transactionsId } = req.body;
+        const { userId, token, transactionId } = req.body;
         const user = tokens.find(u => u.userid === userId);
         if (user !== undefined && user.token === token ){
-            removeTransaction(transactionsId);
+            removeTransaction(transactionId);
             console.log('Transaction remove: ', transactions);
             res.json({succsess : true});
         }

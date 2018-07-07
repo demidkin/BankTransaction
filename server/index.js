@@ -27,7 +27,7 @@ app.use('/api/getTransactions', transactionsRoute);
 app.use('/api/getBanks', banksRoute);
 app.use('/api/getBankByID', bankRoute);
 app.use('/api/addTransaction', transactionsAddRoute);
-app.use('/api/addTransaction', transactionsRemoveRoute);
+app.use('/api/removeTransaction', transactionsRemoveRoute);
 
 app.get('/*', (req, res) =>{
   res.send('API IS WORK!');

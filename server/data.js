@@ -31,9 +31,14 @@ export function addTransaction(ammount, bankId){
 }
 
 
-export function removeTransaction(id){
-    const index = transactions.indexOf(t => t.id === id);
-    if (index !== undefined) transactions = transactions.splice(index, 1);
+export function removeTransaction(Id){
+    const index = transactions.map(tr => tr.id).indexOf(parseInt(Id));
+    if (index !== undefined) transactions.splice(index, 1);
+}
+export function logoutUser(userId){
+    const index = tokens.map(t => t.userid).indexOf(userId);
+    console.log('Logout user: ', userId, ' index: ', index);
+    if (index !== -1) tokens.splice(index, 1);  
 }
 
 

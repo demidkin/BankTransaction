@@ -25,15 +25,21 @@ class Login extends React.Component {
     onSubmit(e){
         this.setState({ errors: {}, isLoading: true});
         e.preventDefault();
-        this.props.auth(this.state)
-        .then(
-            (res) => {
-                this.setState({token : res.data.token})
-                this.props.saveToken({ userid: this.state.email, token: this.state.token });
-                this.props.history.push('/');
-            },
-            (erorr) => this.setState({errors: erorr.response.data, isLoading: false})
-        );
+        this.props.auth(this.state).then(response => {
+            if (response.status === 200){
+                response.json().then((res) => { 
+                    this.setState({token : res.token})
+                    this.props.saveToken({ userid: this.state.email, token: this.state.token });
+                    this.props.history.push('/');
+                })
+            }
+            else{
+                response.json().then(
+                (res) => { 
+                    this.setState({errors: res, isLoading: false})
+                })                  
+            }
+        })
     }
 
     render(){

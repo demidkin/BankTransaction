@@ -23,13 +23,19 @@ class Signup extends React.Component {
     onSubmit(e){
         this.setState({ errors: {}, isLoading: true});
         e.preventDefault();
-        this.props.userSignupRequest(this.state)
-        .then(
-            () => {
-                this.props.history.push('/login');
-            },
-            (erorr) => this.setState({errors: erorr.response.data, isLoading: false})
-        );
+        this.props.userSignupRequest(this.state).then(response => {
+            if (response.status === 200){
+                response.json().then((res) => { 
+                    this.props.history.push('/login');
+                })
+            }
+            else{
+                response.json().then(
+                (res) => { 
+                    this.setState({errors: res, isLoading: false})
+                })                  
+            }
+        })
     }
 
     render(){

@@ -2,7 +2,7 @@ import express from 'express';
 import Validator from 'validator';
 import isEmpty from 'lodash/isEmpty';
 import bcrypt from 'bcryptjs';
-import { users, emails, tokens } from '../data';
+import { users, emails, tokens, logoutUser } from '../data';
 
 let router = express.Router();
 
@@ -28,9 +28,11 @@ router.post('/', (req, res) => {
         const { email, password } = req.body;
         const userId = emails.indexOf(email);
         if (userId !== -1 && users[userId].password === password){
+            logoutUser(email);
             const secret = bcrypt.hashSync(email + password, 10);
             tokens.push({ userid: users[userId].email, token: secret });
             console.log('Login: ', {token: secret});
+            
             res.json({token: secret});
         }
         else {

@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { loadBanks } from '../actions/loadBanks.action'
 import { saveBanksToStor } from '../actions/saveBanksToStor.action';
 import { loadTransactions } from '../actions/loadTransactions.action';
+import { removeTransaction } from '../actions/removeTransaction.action';
 import '../sass/transactions.component.scss'
 
 
@@ -19,20 +20,19 @@ class Transactions extends React.Component {
     }
 
     onClick(e){
-        console.log(e.target.name, e.target.value);
+        const userid = this.props.store.tokenStore[0].userid;
+        const token = this.props.store.tokenStore[0].token;
+
+        this.props.removeTransaction({ userId: userid, token: token, transactionId: e.target.value }).then(response => {
+            if (response.status === 200) response.json().then(() => this.getTransactions())
+            else{ response.json().then( (res) => this.setState({ errors :res }) )}
+        })   
     }
     componentWillMount(){
         this.getTransactions();
     }   
 
     componentDidMount() {
-        
-        this.updateState();
-       
-        setInterval(this.updateState.bind(this), 10e3)
-    }
-
-    updateState() {
         
     }
 
@@ -41,17 +41,20 @@ class Transactions extends React.Component {
         const token = this.props.store.tokenStore[0].token;
 
         if ( token !== null &&  userid !== null )
-            this.props.loadBanks({ userId: userid, token: token })
-            .then(
-                (res) => { 
-                    this.props.saveBanksToStor(res.data);
-                    this.props.loadTransactions({ userId: userid, token: token, banks: res.data })
-                },
-                (erorr) => { 
-                    this.setState({ errors : erorr.response.data })
+            this.props.loadBanks({ userId: userid, token: token}).then(response => {
+                if (response.status === 200){
+                    response.json().then((res) => { 
+                        this.props.saveBanksToStor(res);
+                        this.props.loadTransactions({ userId: userid, token: token, banks: res })
+                    })
                 }
-            );
-
+                else{
+                    response.json().then(
+                    (res) => { 
+                        this.setState({ errors : res })
+                    })                  
+                }
+            })
     }
 
     updateBankName(){
@@ -69,12 +72,10 @@ class Transactions extends React.Component {
 
 
     render(){
-
         var transactions = [];
         if (this.props.store.transactionStore[0] !== undefined){
             transactions = Array.from(this.props.store.transactionStore[0]);
         }
-        console.log(transactions);
         return (
             <div className="transactions">
                 <table>
@@ -85,6 +86,7 @@ class Transactions extends React.Component {
                     <TransactionList transactions={transactions} onClick={this.onClick}/>
                 </table>
             </div>
+
         );
     } 
 }
@@ -110,4 +112,4 @@ class TransactionList extends React.Component {
     } 
 }
 
-export default connect( state => ({ store: state }), { loadBanks, saveBanksToStor, loadTransactions })(Transactions);
+export default connect( state => ({ store: state }), { loadBanks, saveBanksToStor, loadTransactions, removeTransaction })(Transactions);

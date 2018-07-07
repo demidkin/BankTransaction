@@ -17,13 +17,15 @@ function validatorInput(data) {
     if (data.ammount === undefined || Validator.isEmpty(data.ammount + '')){
         errors.ammount = 'Ammount is required';
     }
+    else if (!Validator.isNumeric(data.ammount)){
+        errors.ammount = 'Ammount is numeric';
+    }
+    console.log('data bankId ==============', data.bankId)
     if (data.bankId === undefined || Validator.isEmpty(data.bankId + '')){
         errors.bankId = 'Bank is required';
     }
-    if (Validator.isNumeric(data.ammount)){
-        errors.ammount = 'Ammount is numeric';
-    }
-    const bank = banks.find(b => b.id === data.bankId);
+    
+    const bank = banks.find(b => b.id === parseInt(data.bankId));
     if (bank === undefined){
         errors.bankId = 'Unknown bank';
     }
@@ -38,7 +40,7 @@ router.post('/', (req, res) => {
         const { userId, token, ammount, bankId } = req.body;
         const user = tokens.find(u => u.userid === userId);
         if (user !== undefined && user.token === token ){
-            addTransaction( ammount, bankId );
+            addTransaction( parseInt(ammount), parseInt(bankId) );
             console.log('Transaction add: ', transactions);
             res.json({succsess : true});
         }
