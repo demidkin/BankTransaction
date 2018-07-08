@@ -1,19 +1,37 @@
-h1 {
-  color: white;
-  background: blue;
-  border: 1px solid darkgrey; }
+body {
+  font-family: 'Times New Roman', Times, serif; }
+.navigation ul {
+  list-style-type: none;
+  width: 1000px;
+  margin-left: auto;
+  margin-right: auto;
+  position: absolute;
+  top: 0;
+  clear: both; }
+
+.navigation li.menu {
+  float: left; }
+
+.navigation li.menuRight {
+  float: left; }
+
+.navigation button {
+  height: 30px;
+  background-color: lightgrey; }
 .login {
   width: 330px;
   height: 140px;
   margin-left: auto;
   margin-right: auto;
-  margin-top: 100px; }
+  margin-top: 80px;
+  font-size: 150%; }
   .login fieldset {
-    width: 300px; }
+    width: 300px;
+    background: lightgrey; }
   .login legend {
-    color: red; }
+    color: green; }
   .login input {
-    margin-top: 10px;
+    margin-top: 15px;
     margin-left: 10px;
     clear: right;
     float: right; }
@@ -22,23 +40,80 @@ h1 {
     margin-left: 10px;
     float: left;
     clear: both; }
-.transactions h2 {
-  color: red; }
-.transaction-add h2 {
-  color: green; }
+  .login span {
+    margin-top: 10px;
+    margin-left: 10px;
+    color: red;
+    clear: left;
+    float: left; }
+.transactions {
+  margin-top: 80px; }
+  .transactions tr {
+    padding: 0;
+    margin: 0; }
+  .transactions table caption {
+    color: red;
+    font-size: 18px;
+    font-weight: bold; }
+  .transactions table {
+    width: 100%;
+    background: lightgray;
+    border-collapse: collapse;
+    border: 3px solid darkslategray; }
+  .transactions td {
+    border: 1px solid darkslategray;
+    text-align: center; }
+  .transactions thead {
+    border: 3px solid darkslategray;
+    color: black;
+    font-size: 14px;
+    font-weight: bold;
+    text-align: center; }
+  .transactions button {
+    width: 120px;
+    margin: auto 0; }
+.transaction-add {
+  width: 330px;
+  height: 140px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 100px;
+  font-size: 150%; }
+  .transaction-add fieldset {
+    width: 300px;
+    background: lightskyblue; }
+  .transaction-add legend {
+    color: darkred; }
+  .transaction-add input, .transaction-add select {
+    margin-top: 15px;
+    margin-left: 10px;
+    clear: right;
+    float: right; }
+  .transaction-add label {
+    margin-top: 10px;
+    margin-left: 10px;
+    float: left;
+    clear: both; }
+  .transaction-add span {
+    margin-top: 10px;
+    margin-left: 10px;
+    color: red;
+    clear: left;
+    float: left; }
 .signup {
   width: 330px;
   height: 140px;
   margin-left: auto;
   margin-right: auto;
-  margin-top: 100px; }
+  margin-top: 80px;
+  font-size: 150%; }
   .signup fieldset {
     width: 300px;
     background: lightgrey; }
   .signup legend {
     color: red; }
   .signup input {
-    margin-top: 10px;
+    margin-top: 15px;
     margin-left: 10px;
     clear: right;
     float: right; }
@@ -47,3 +122,14 @@ h1 {
     margin-left: 10px;
     float: left;
     clear: both; }
+  .signup span {
+    margin-top: 10px;
+    margin-left: 10px;
+    color: red;
+    clear: left;
+    float: left; }
+.home {
+  margin-top: 80px; }
+  .home h2 {
+    color: darkred;
+    text-align: center; }
