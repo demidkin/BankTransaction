@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux'
+import { saveData } from '../actions/saveData.action';
 import { auth } from '../actions/auth.action'
 import { saveToken } from '../actions/saveToken.action'
 import '../sass/login.component.scss'
@@ -30,12 +31,14 @@ class Login extends React.Component {
                 response.json().then((res) => { 
                     this.setState({token : res.token})
                     this.props.saveToken({ userid: this.state.email, token: this.state.token });
+                    this.props.saveData({ type: 'LOGINED', payload: true });
                     this.props.history.push('/');
                 })
             }
             else{
                 response.json().then(
                 (res) => { 
+                    this.props.saveData({ type: 'LOGOUT', payload: false });
                     this.setState({errors: res, isLoading: false})
                 })                  
             }
@@ -66,4 +69,4 @@ class Login extends React.Component {
 
 
 
-export default connect( null, { auth, saveToken })(Login);
+export default connect( state => ({ store: state }), { auth, saveToken, saveData })(Login);

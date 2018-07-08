@@ -1,12 +1,13 @@
 import express from 'express';
 import bodyParser from 'body-parser';
 import usersRoute from './routes/users.route';
-import loginRoute from './routes/login.route'
-import transactionsRoute from './routes/transactions.route'
-import banksRoute from './routes/banks.route'
-import bankRoute from './routes/bank.route'
-import transactionsAddRoute from './routes/transaction-add.route'
-import transactionsRemoveRoute from './routes/transaction-remove.route'
+import loginRoute from './routes/login.route';
+import logoutRoute from './routes/logout.route';
+import transactionsRoute from './routes/transactions.route';
+import banksRoute from './routes/banks.route';
+import bankRoute from './routes/bank.route';
+import transactionsAddRoute from './routes/transaction-add.route';
+import transactionsRemoveRoute from './routes/transaction-remove.route';
 
 
 import { banks, transactions} from './data'
@@ -23,6 +24,7 @@ app.use(bodyParser.json());
 
 app.use('/api/users', usersRoute);
 app.use('/api/auth', loginRoute);
+app.use('/api/logout', logoutRoute);
 app.use('/api/getTransactions', transactionsRoute);
 app.use('/api/getBanks', banksRoute);
 app.use('/api/getBankByID', bankRoute);

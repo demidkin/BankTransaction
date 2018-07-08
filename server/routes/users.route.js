@@ -41,7 +41,7 @@ router.post('/', (req, res) => {
             console.log(errors);
             res.status(400).json(errors);
         }
-    },1e2)
+    },1e1)
 });
 
 export default router;

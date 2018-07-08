@@ -45,7 +45,7 @@ router.post('/', (req, res) => {
             res.json({succsess : true});
         }
         else {
-            res.status(400).json({ email: 'Invalid token' });
+            res.status(400).json({ ammount: 'Invalid token' });
         }            
     } else {
         console.log(errors);

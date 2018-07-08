@@ -10,6 +10,8 @@ import Navigation from './components/navigation.component';
 import Transactions from './components/transactions.component';
 import TransactionAdd from './components/transaction-add.component'
 import Signup from './components/signup.component';
+import Home from './components/home.component';
+import PrivateRoute from './components/PrivateRoute.componet';
 
 import './main.scss';
 
@@ -27,38 +29,34 @@ class App extends React.Component {
 
 
 
-    componentDidMount() {
-        this.updateState()
-        this.setupListeners()
-        setInterval(this.updateState.bind(this), 10e3)
-    }
-
-    updateState() {
-       
-    }
-
-    setupListeners() {
+    componentWilMount() {
 
     }
 
-    redirect(){
-        this.props.history.push('/');
-    }
+
+
 
     render() {
+
+                
+        if (this.props.store.tokenStore[1] !== undefined){
+            var { isAuthenticated } = this.props.store.tokenStore[1];
+        }
+        else isAuthenticated = false;
+
         return (
                 <Router history={browserHistory}>
                     <div>
                         <Navigation />
-                        {/* <Route exac path="/" component={}/> */}
-                        <Route path="/login" component={Login} />
-                        <Route path='/transactions' component={Transactions} />
-                        <Route path="/add-transaction" component={TransactionAdd} />
-                        <Route path="/signup" component={Signup} />
+                        <Route exact path="/" component={Home}/>
+                        <PrivateRoute path="/login" component={Login} isAuthenticated={!isAuthenticated}/>
+                        <PrivateRoute path='/transactions' component={Transactions} isAuthenticated={isAuthenticated}/>
+                        <PrivateRoute path="/add-transaction" component={TransactionAdd} isAuthenticated={isAuthenticated}/>
+                        <PrivateRoute path="/signup" component={Signup} isAuthenticated={!isAuthenticated}/>
                     </div>
                 </Router>    
         )
     }
 }
 
-export default connect( state => ({ tokenStore: state }), { loadToken })(App);
+export default connect( state => ({ store: state }), { loadToken })(App);

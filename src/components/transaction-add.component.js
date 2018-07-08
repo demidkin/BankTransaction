@@ -27,6 +27,7 @@ class TransactionAdd extends React.Component {
     componentWillMount(){
         const userid = this.props.store.tokenStore[0].userid;
         const token = this.props.store.tokenStore[0].token;
+        this.props.store.banksStore[0] = undefined;
 
         if ( token !== null &&  userid !== null )
             this.props.loadBanks({ userId: userid, token: token}).then(response => {
@@ -69,9 +70,13 @@ class TransactionAdd extends React.Component {
     render(){
         const { errors } = this.state;
         var banks = [];
+        console.log(this.props.store.banksStore[0]);
         if (this.props.store.banksStore[0] !== undefined){
             banks = Array.from(this.props.store.banksStore[0].banks);
         }
+
+
+
 
         return (
             <form className="transaction-add" onSubmit={this.onSubmit}>

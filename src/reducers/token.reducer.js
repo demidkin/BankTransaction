@@ -9,9 +9,31 @@ export default function tokenStore(state = [], action = {}){
     if (action.type === 'LOAD_TOKEN'){
         const userid = sessionStorage.getItem('userid', action.payload.userid);
         const token = sessionStorage.getItem('token', action.payload.token);
+        let auth = true;
+        if (token === '') auth = false;
         if (userid !== undefined && token !== undefined)
         return [
-            { userid: userid, token: token }
+                {userid: userid, token: token}, 
+                {isAuthenticated: auth}
+        
+        ]
+    }
+    if (action.type === 'LOGINED'){
+        return [
+            ...state,
+            {isAuthenticated: true }
+        ]
+        
+    }
+    if (action.type === 'LOGOUT'){
+        sessionStorage.setItem('userid', '');
+        sessionStorage.setItem('token', '');
+        return[ 
+            {                 
+                userid: '', 
+                token: '' ,
+                isAuthenticated: false 
+            }
         ]
     }
     return state;   

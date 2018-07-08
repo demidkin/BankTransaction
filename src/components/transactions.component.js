@@ -40,6 +40,8 @@ class Transactions extends React.Component {
         const userid = this.props.store.tokenStore[0].userid;
         const token = this.props.store.tokenStore[0].token;
 
+        //this.props.store.transactionStore[0] = undefined;
+
         if ( token !== null &&  userid !== null )
             this.props.loadBanks({ userId: userid, token: token}).then(response => {
                 if (response.status === 200){
@@ -50,7 +52,8 @@ class Transactions extends React.Component {
                 }
                 else{
                     response.json().then(
-                    (res) => { 
+                    (res) => {
+                        
                         this.setState({ errors : res })
                     })                  
                 }
