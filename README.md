@@ -3,8 +3,8 @@ Test task on the front-end development
 
 1. Подключение репозитория  
 
-    git clone https://github.com/demidkin/BankTransaction.git
-    cd ./BankTransaction
+        git clone https://github.com/demidkin/BankTransaction.git
+        cd ./BankTransaction
 
 2. Установка зависимостей
 
