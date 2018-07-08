@@ -3,15 +3,15 @@ Test task on the front-end development
 
 1. Подключение репозитория  
 
-```cmd
-git clone https://github.com/demidkin/BankTransaction.git
-cd ./BankTransaction
+```git
+    git clone https://github.com/demidkin/BankTransaction.git
+    cd ./BankTransaction
 ```
 
 2. Установка зависимостей
 
 ```cmd
-npm install
+    npm install
 ```
 
 3. Заупск API сервера (http://localhost:3000)
