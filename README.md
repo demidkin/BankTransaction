@@ -16,12 +16,15 @@ npm install
 
 3. Заупск API сервера (http://localhost:3000)
 
+```cmd
     npm run api
+```    
 
 4. Запуск веб-сервра front-end
 
+```npm
     npm start
-
+``` 
 
 Сборка webpack
 
