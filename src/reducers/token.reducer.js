@@ -11,7 +11,7 @@ export default function tokenStore(state = [], action = {}){
         const token = sessionStorage.getItem('token', action.payload.token);
         let auth = true;
         if (!token || token === '') auth = false;
-        if (!userid || userid !== undefined && token !== undefined)
+        if (!userid && !token)
         return [
                 {userid: userid, token: token}, 
                 {isAuthenticated: auth}
