@@ -3,7 +3,7 @@ export default function banksStore(state = [], action = {}){
         return { banks: action.payload }
     }
     if (action.type === 'BANKS_LOADED_ERROR'){
-        return { erorrs: action.payload }
+        return { errors: action.payload }
     }
     return state;   
 }

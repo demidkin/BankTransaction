@@ -15,8 +15,6 @@ import PrivateRoute from './components/PrivateRoute.componet';
 
 import './main.scss';
 
-
-
 class App extends React.Component {
 
     constructor(prop) {
@@ -26,15 +24,6 @@ class App extends React.Component {
         }
         this.props.loadToken();
     }
-
-
-
-    componentWilMount() {
-
-    }
-
-
-
 
     render() {
         let isAuthenticated = true;

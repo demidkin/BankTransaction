@@ -41,4 +41,4 @@ console.log('======Demo data transactions==========');
 console.log(transactions);
 
 
-app.listen(3000, () => console.log('Rining on http://localhost:3000'));
+app.listen(3000, () => console.log('Running  on http://localhost:3000'));
