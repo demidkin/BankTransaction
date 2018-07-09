@@ -7,6 +7,7 @@ class PrivateRoute extends React.Component {
     if (this.props.isAuthenticated) {
       route = <Route path={this.props.path} component={this.props.component}/>
     } else {
+      //route = <Route path={this.props.path} component={this.props.component}/>
       route = <Redirect to="/login" />
     }
 

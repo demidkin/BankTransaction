@@ -2,39 +2,31 @@ export default function tokenStore(state = [], action = {}){
     if (action.type === 'NEW_TOKEN'){
         sessionStorage.setItem('userid', action.payload.userid);
         sessionStorage.setItem('token', action.payload.token);
-        return [
-            action.payload
-        ]
+        return action.payload
     }
     if (action.type === 'LOAD_TOKEN'){
-        const userid = sessionStorage.getItem('userid', action.payload.userid);
-        const token = sessionStorage.getItem('token', action.payload.token);
+        const userid = sessionStorage.getItem('userid');
+        const token = sessionStorage.getItem('token');
         let auth = true;
-        if (!token || token === '') auth = false;
-        if (!userid && !token)
-        return [
-                {userid: userid, token: token}, 
-                {isAuthenticated: auth}
-        
-        ]
+        if (!token || token === '' || !userid || userid === '') auth = false;
+        return { userid: userid, token: token, isAuthenticated: auth }
     }
     if (action.type === 'LOGINED'){
-        return [
-            ...state,
-            {isAuthenticated: true }
-        ]
-        
+        return { 
+            token: state.token,
+            userid: state.userid, 
+            isAuthenticated: true 
+        }
     }
     if (action.type === 'LOGOUT'){
         sessionStorage.setItem('userid', '');
         sessionStorage.setItem('token', '');
-        return[ 
-            {                 
-                userid: '', 
-                token: '' ,
-                isAuthenticated: false 
-            }
-        ]
+        return {
+            userid: undefined, 
+            token: undefined,
+            isAuthenticated: false
+        }
+        
     }
     return state;   
 }

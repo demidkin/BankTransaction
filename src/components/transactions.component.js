@@ -20,8 +20,8 @@ class Transactions extends React.Component {
     }
 
     onClick(e){
-        const userid = this.props.store.tokenStore[0].userid;
-        const token = this.props.store.tokenStore[0].token;
+        const userid = this.props.store.tokenStore.userid;
+        const token = this.props.store.tokenStore.token;
 
         this.props.removeTransaction({ userId: userid, token: token, transactionId: e.target.value }).then(response => {
             if (response.status === 200) response.json().then(() => this.getTransactions())
@@ -37,11 +37,8 @@ class Transactions extends React.Component {
     }
 
     getTransactions(){
-        const userid = this.props.store.tokenStore[0].userid;
-        const token = this.props.store.tokenStore[0].token;
-
-        //this.props.store.transactionStore[0] = undefined;
-
+        const userid = this.props.store.tokenStore.userid;
+        const token = this.props.store.tokenStore.token;
         if ( token !== null &&  userid !== null )
             this.props.loadBanks({ userId: userid, token: token}).then(response => {
                 if (response.status === 200){
@@ -53,7 +50,6 @@ class Transactions extends React.Component {
                 else{
                     response.json().then(
                     (res) => {
-                        
                         this.setState({ errors : res })
                     })                  
                 }
@@ -62,23 +58,17 @@ class Transactions extends React.Component {
 
     updateBankName(){
         const trarr = this.state.transactions;
-        const userid = this.props.store.tokenStore[0].userid;
-        const token = this.props.store.tokenStore[0].token;
-
+        const userid = this.props.store.tokenStore.userid;
+        const token = this.props.store.tokenStore.token;
         trarr.forEach(transaction => {
             this.props.getBankById({ userId: userid, token: token, bankId: transaction.bankId });
-
-            
         });
     }
 
 
 
     render(){
-        var transactions = [];
-        if (this.props.store.transactionStore[0] !== undefined){
-            transactions = Array.from(this.props.store.transactionStore[0]);
-        }
+        let { transactions } = this.props.store.transactionStore;
         return (
             <div className="transactions">
                 <table>
@@ -97,7 +87,8 @@ class Transactions extends React.Component {
 class TransactionList extends React.Component {
 
     render(){
-        const Transactions = this.props.transactions.map((tr) =>
+        let Transactions;
+        if (this.props.transactions) Transactions = this.props.transactions.map((tr) =>
             <tr key={'rowTransactionId' + tr.id}>
                 <td>{tr.id}</td>
                 <td>{tr.ammount}</td>

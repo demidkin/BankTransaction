@@ -1,13 +1,9 @@
 export default function banksStore(state = [], action = {}){
     if (action.type === 'BANKS_LOADED'){
-        return [
-            { banks: action.payload }
-        ]
+        return { banks: action.payload }
     }
     if (action.type === 'BANKS_LOADED_ERROR'){
-        return [
-            { erorrs: action.payload }
-        ]
+        return { erorrs: action.payload }
     }
     return state;   
 }

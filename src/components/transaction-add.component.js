@@ -25,8 +25,8 @@ class TransactionAdd extends React.Component {
     }
 
     componentWillMount(){
-        const userid = this.props.store.tokenStore[0].userid;
-        const token = this.props.store.tokenStore[0].token;
+        const userid = this.props.store.tokenStore.userid;
+        const token = this.props.store.tokenStore.token;
         this.props.store.banksStore[0] = undefined;
 
         if ( token !== null &&  userid !== null )
@@ -34,7 +34,7 @@ class TransactionAdd extends React.Component {
                 if (response.status === 200){
                     response.json().then((res) => { 
                         this.props.saveBanksToStor(res);
-                        this.setState({bankId: this.props.store.banksStore[0].banks[0].id});
+                        this.setState({bankId: this.props.store.banksStore.banks[0].id});
                     })
                 }
                 else{
@@ -47,8 +47,8 @@ class TransactionAdd extends React.Component {
     }
 
     onSubmit(e){
-        const userid = this.props.store.tokenStore[0].userid;
-        const token = this.props.store.tokenStore[0].token;
+        const userid = this.props.store.tokenStore.userid;
+        const token = this.props.store.tokenStore.token;
 
         this.setState({ errors: {}, isLoading: true});
         e.preventDefault();
@@ -69,15 +69,7 @@ class TransactionAdd extends React.Component {
 
     render(){
         const { errors } = this.state;
-        var banks = [];
-        console.log(this.props.store.banksStore[0]);
-        if (this.props.store.banksStore[0] !== undefined){
-            banks = Array.from(this.props.store.banksStore[0].banks);
-        }
-
-
-
-
+        const banks = this.props.store.banksStore.banks;
         return (
             <form className="transaction-add" onSubmit={this.onSubmit}>
                 <fieldset>
@@ -101,7 +93,8 @@ class TransactionAdd extends React.Component {
 class BankSelect extends React.Component {
 
     render(){
-        const Banks = this.props.banks.map((bank) =>
+        let Banks;
+        if (this.props.banks) Banks = this.props.banks.map((bank) =>
             <option key={'bankid' + bank.id} value={bank.id}>{bank.name}</option>
         );
         return (
