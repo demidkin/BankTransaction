@@ -10,17 +10,17 @@ function validatorInput(data) {
     console.log(data.userId);
     console.log(data.token);
     console.log(data.bankId);
-    if (data.userId === undefined || Validator.isEmpty(data.userId + '')){
+    if (data.userId || Validator.isEmpty(data.userId + '')){
         errors.userId = 'UserId is required';
     }
-    if (data.token === undefined || Validator.isEmpty(data.token + '')){
+    if (data.token || Validator.isEmpty(data.token + '')){
         errors.token = 'Token is required';
     }
-    if (data.bankId === undefined || Validator.isEmpty(data.bankId + '')){
+    if (data.bankId || Validator.isEmpty(data.bankId + '')){
         errors.bankId = 'BankId is required';
     }
     const bank = banks.find(b => b.id === data.bankId);
-    if (bank === undefined){
+    if (!bank){
         errors.bankId = 'Unknown bank';
     }
 

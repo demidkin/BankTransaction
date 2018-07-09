@@ -30,4 +30,4 @@ Test task on the front-end development
 
     css:    ./dist/main.css
     js:     ./dist/main.js
-    html:   ./dist.index.html
+    html:   ./dist/index.html
