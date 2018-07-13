@@ -2,9 +2,9 @@ import React from 'react';
 
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux';
-import { logout } from '../actions/logout.action';
-import { saveData } from '../actions/saveData.action';
-import '../sass/navigation.component.scss'
+import { logout } from 'src/actions/logout.action';
+import { saveData } from 'src/actions/saveData.action';
+import 'src/sass/navigation.component.scss'
 
 
 class Navigation extends React.Component {

@@ -1,9 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { loadBanks } from '../actions/loadBanks.action';
-import { saveBanksToStor } from '../actions/saveBanksToStor.action';
-import { addTransaction } from '../actions/addTransaction.action';
-import '../sass/transactions-add.component.scss'
+import { loadBanks } from 'src/actions/loadBanks.action';
+import { saveBanksToStor } from 'src/actions/saveBanksToStor.action';
+import { addTransaction } from 'src/actions/addTransaction.action';
+import 'src/sass/transactions-add.component.scss'
 
 
 class TransactionAdd extends React.Component {

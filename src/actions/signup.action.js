@@ -1,4 +1,4 @@
-import { post } from './ajax';
+import { post } from 'src/actions/ajax';
 
 export function userSignupRequest (userData) {
     return dispatch => {

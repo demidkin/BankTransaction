@@ -7,23 +7,23 @@ export const emails = [];
 export const banks = [];
 export var transactions = [];
 export const tokens = [];
-export var transactionIndex = 0;
+export var transactionIndex = 1000;
 
 
 
 //demo data banks
-banks.push(new Bank(0,'Сбербанк России'));
-banks.push(new Bank(1,'ВТБ'));
-banks.push(new Bank(2,'Альфа-Банк'));
-banks.push(new Bank(3,'Газпромбанк'));
-banks.push(new Bank(4,'Россельхозбанк'));
+banks.push(new Bank(100,'Сбербанк России'));
+banks.push(new Bank(101,'ВТБ'));
+banks.push(new Bank(102,'Альфа-Банк'));
+banks.push(new Bank(103,'Газпромбанк'));
+banks.push(new Bank(104,'Россельхозбанк'));
 
 //demo data transactions
-transactions.push(new Transaction(transactionIndex++, 200, 4));
-transactions.push(new Transaction(transactionIndex++, 250, 3));
-transactions.push(new Transaction(transactionIndex++, 100, 2));
-transactions.push(new Transaction(transactionIndex++, 150, 1));
-transactions.push(new Transaction(transactionIndex++, 1000, 0));
+transactions.push(new Transaction(transactionIndex++, 200, 104));
+transactions.push(new Transaction(transactionIndex++, 250, 103));
+transactions.push(new Transaction(transactionIndex++, 100, 102));
+transactions.push(new Transaction(transactionIndex++, 150, 101));
+transactions.push(new Transaction(transactionIndex++, 1000, 100));
 
 
 export function addTransaction(ammount, bankId){

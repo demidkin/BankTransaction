@@ -1,10 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { loadBanks } from '../actions/loadBanks.action'
-import { saveBanksToStor } from '../actions/saveBanksToStor.action';
-import { loadTransactions } from '../actions/loadTransactions.action';
-import { removeTransaction } from '../actions/removeTransaction.action';
-import '../sass/transactions.component.scss'
+import { loadBanks } from 'src/actions/loadBanks.action'
+import { saveBanksToStor } from 'src/actions/saveBanksToStor.action';
+import { loadTransactions } from 'src/actions/loadTransactions.action';
+import { removeTransaction } from 'src/actions/removeTransaction.action';
+import 'src/sass/transactions.component.scss'
 
 
 class Transactions extends React.Component {

@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux';
-import tokenStore from './token.reducer';
-import transactionStore from './transactions.reducer'
-import banksStore from './banks.reducer';
+import tokenStore from 'src/reducers/token.reducer';
+import transactionStore from 'src/reducers/transactions.reducer'
+import banksStore from 'src/reducers/banks.reducer';
 
 
 export default combineReducers({

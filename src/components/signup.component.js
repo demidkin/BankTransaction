@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux'
-import { userSignupRequest } from '../actions/signup.action'
-import '../sass/signup.component.scss'
+import { userSignupRequest } from 'src/actions/signup.action'
+import 'src/sass/signup.component.scss'
 
 
 

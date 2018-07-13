@@ -1,5 +1,5 @@
 
-import { post } from './ajax'
+import { post } from 'src/actions/ajax'
 
 export function loadTransactions (userData) {
     return dispatch => {

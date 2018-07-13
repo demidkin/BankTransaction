@@ -1,9 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux'
-import { saveData } from '../actions/saveData.action';
-import { auth } from '../actions/auth.action'
-import { saveToken } from '../actions/saveToken.action'
-import '../sass/login.component.scss'
+import { saveData } from 'src/actions/saveData.action';
+import { auth } from 'src/actions/auth.action'
+import { saveToken } from 'src/actions/saveToken.action'
+import 'src/sass/login.component.scss'
 
 
 
@@ -14,7 +14,8 @@ class Login extends React.Component {
             email: '',
             password: '',
             token: '',
-            errors: []
+            errors: [],
+            isLoading: false
         }
         this.onChange = this.onChange.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
@@ -24,7 +25,7 @@ class Login extends React.Component {
         this.setState({[e.target.name]: e.target.value});
     }
     onSubmit(e){
-        this.setState({ errors: {}, isLoading: true});
+        this.setState({ errors: [], isLoading: true});
         e.preventDefault();
         this.props.auth(this.state).then(response => {
             if (response.status === 200){
@@ -69,4 +70,4 @@ class Login extends React.Component {
 
 
 
-export default connect( state => ({ store: state }), { auth, saveToken, saveData })(Login);
+export default connect( null, { auth, saveToken, saveData })(Login);
