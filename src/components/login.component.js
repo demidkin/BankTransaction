@@ -3,8 +3,6 @@ import { connect } from 'react-redux'
 import { auth } from 'src/actions/auth.action'
 import 'src/sass/login.component.scss'
 
-
-
 class Login extends React.Component {
     constructor(props){
         super(props);
@@ -20,6 +18,7 @@ class Login extends React.Component {
     onChange(e) {
         this.setState({[e.target.name]: e.target.value});
     }
+
     onSubmit(e){
         this.setState({ isLoading: true});
         e.preventDefault();
@@ -52,7 +51,5 @@ class Login extends React.Component {
         );
     } 
 }
-
-
 
 export default connect( state => ({ errors: state.errorsStore.errors }), { auth })(Login);

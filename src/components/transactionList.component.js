@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { updateBankList } from 'src/actions/updateBankList.action'
 import { updateTransactionsList } from 'src/actions/updateTransactionsList.action';
-import { removeTransaction } from 'src/actions/removeTransaction.action';
+import { transactionRemove } from 'src/actions/transactionRemove.action';
 
 class TransactionList extends React.Component {
     constructor(props){
@@ -10,24 +10,23 @@ class TransactionList extends React.Component {
         this.onClick = this.onClick.bind(this);
     }
 
-    bankName(id) {
+    getBankName(_id) {
         let bankName = 'Loding...'
-        let index = this.props.banks.indexOf(id);
-        if (index !== -1) bankName = banks[index];
+        if (this.props.banks){
+            let index = this.props.banks.map(b => b.id).indexOf(_id);
+            if (index !== -1) bankName = this.props.banks[index].name;
+        }
         return bankName;
     }
+
     onClick(e) {
-        // this.props.removeTransaction({ token: token, transactionId: e.target.value }).then(response => {
-        //     if (response.status === 200) response.json().then(() => this.getTransactions())
-        //     else{ response.json().then( (res) => this.setState({ errors :res }) )}
-        // })
-        
-        this.updateTransactionList();
+        this.props.transactionRemove({ token: this.props.token, transactionId: e.target.value }, (isOk) =>{
+            if (isOk) {
+                this.props.updateTransactionsList({ token: this.props.token });            
+            }
+        });
     }
-    componentWillMount(){
-        this.props.updateTransactionsList({ token: this.props.token });
-        this.props.updateBankList({ token: this.props.token });
-    }  
+    
     render(){
         let Transactions;
         if (this.props.transactions) 
@@ -35,9 +34,9 @@ class TransactionList extends React.Component {
                 <tr key={'rowTransactionId' + tr.id}>
                     <td>{ tr.id }</td>
                     <td>{ tr.ammount }</td>
-                    <td>{ bankName(tr.bankId) }</td>
+                    <td>{ this.getBankName(tr.bankId) }</td>
                     <td>
-                        <button name={'button' + tr.id} value={tr.id} onClick={this.props.onClick}>Remove</button>
+                        <button name={'button' + tr.id} value={tr.id} onClick={this.onClick}>Remove</button>
                     </td>
                 </tr>
         );
@@ -60,7 +59,7 @@ export default connect( state => ({
         banks : state.banksStore.banks, 
         transactions : state.transactionStore.transactions 
     }), { 
-        removeTransaction,
+        transactionRemove,
         updateBankList,
         updateTransactionsList
     })(TransactionList);

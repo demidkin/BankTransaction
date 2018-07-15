@@ -9,6 +9,7 @@ export function logout (userData) {
                     dispatch({ type: 'LOGOUT', payload: {} });
                     dispatch({ type: 'TRANSACTION_CLEAR', payload: {} });
                     dispatch({ type: 'BANKS_CLEAR', payload: {} });
+                    dispatch({ type: 'ERRORS', payload: {} });
                 })
             }
             else{

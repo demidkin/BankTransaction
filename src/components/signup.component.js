@@ -3,8 +3,6 @@ import { connect } from 'react-redux'
 import { userSignupRequest } from 'src/actions/signup.action'
 import 'src/sass/signup.component.scss'
 
-
-
 class Signup extends React.Component {
     constructor(props){
         super(props);
@@ -20,6 +18,7 @@ class Signup extends React.Component {
     onChange(e) {
         this.setState({[e.target.name]: e.target.value});
     }
+
     onSubmit(e){
         this.setState({ isLoading: true });
         e.preventDefault();
@@ -49,7 +48,5 @@ class Signup extends React.Component {
         );
     } 
 }
-
-
 
 export default connect( state => ({ errors: state.errorsStore.errors }), { userSignupRequest })(Signup);

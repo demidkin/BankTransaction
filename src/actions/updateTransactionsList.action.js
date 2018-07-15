@@ -7,16 +7,14 @@ export function updateTransactionsList (userData) {
         .then(response => {
             if (response.status === 200){
                 response.json().then((res) => { 
-                let namedTransaction = res.map((transaction) => {
-                    return { id: transaction.id, ammount: transaction.ammount, bankId: transaction.bankId, bank: userData.banks[transaction.bankId].name };
-                });
-                dispatch({type: 'TRANSACTION_LOADED', payload: namedTransaction });
+                    dispatch({ type: 'TRANSACTION_LOADED', payload: res });
+                    dispatch({ type: 'ERRORS', payload: {} });
                 })
             }
             else{
                 response.json().then(
-                (res) => { 
-                    dispatch({type: 'TRANSACTION_LOADED_ERROR', payload: res }) 
+                (err) => { 
+                    dispatch({type: 'ERRORS', payload: err }) 
                 })                  
             }
         })

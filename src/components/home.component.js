@@ -1,9 +1,7 @@
 import React from 'react';
 import 'src/sass/home.component.scss'
 
-
 class Home extends React.Component {
-
     render(){
         return (
             <div className="home">

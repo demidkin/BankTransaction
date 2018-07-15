@@ -8,7 +8,6 @@ import { loadToken } from 'src/actions/loadToken.action'
 import Login from 'src/components/login.component';
 import Navigation from 'src/components/navigation.component';
 import Transactions from 'src/components/transactions.component';
-import TransactionAdd from 'src/components/transaction-add.component'
 import Signup from 'src/components/signup.component';
 import Home from 'src/components/home.component';
 import PrivateRoute from 'src/components/PrivateRoute.componet';
@@ -27,7 +26,7 @@ class App extends React.Component {
     }
 
     render() {
-        let isAuthenticated = this.props.store.tokenStore.isAuthenticated;
+        let isAuthenticated = this.props.token;
 
         return (
                 <Router history={browserHistory}>
@@ -36,7 +35,6 @@ class App extends React.Component {
                         <Route exact path="/" component={Home} />
                         <PrivateRoute path="/login" redirectpath='/' component={Login} isAuthenticated={!isAuthenticated} />
                         <PrivateRoute path='/transactions' redirectpath='/login' component={Transactions} isAuthenticated={isAuthenticated} />
-                        <PrivateRoute path="/add-transaction" redirectpath='/login' component={TransactionAdd} isAuthenticated={isAuthenticated} />
                         <PrivateRoute path="/signup" redirectpath='/' component={Signup} isAuthenticated={!isAuthenticated} />
                     </div>
                 </Router>    
@@ -44,4 +42,4 @@ class App extends React.Component {
     }
 }
 
-export default connect( state => ({ store: state }), { loadToken })(App);
+export default connect( state => ({ token: state.tokenStore.token }), { loadToken })(App);

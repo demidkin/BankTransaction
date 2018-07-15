@@ -4,6 +4,7 @@ export function userSignupRequest (userData, callback) {
     return dispatch => {
         return post('http://localhost:3000/api/users', userData).then(response => {
             if (response.status === 200){
+                dispatch({ type: 'ERRORS', payload: {} });
                 callback(true);
             }
             else {
