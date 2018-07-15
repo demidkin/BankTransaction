@@ -8,8 +8,6 @@ import banksRoute from './routes/banks.route';
 import bankRoute from './routes/bank.route';
 import transactionsAddRoute from './routes/transaction-add.route';
 import transactionsRemoveRoute from './routes/transaction-remove.route';
-
-
 import { banks, transactions} from './data'
 
 let app = express();

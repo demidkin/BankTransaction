@@ -11,7 +11,7 @@ class Signup extends React.Component {
         this.state = {
             email: '',
             password: '',
-            errors: []
+            isLoading: false
         }
         this.onChange = this.onChange.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
@@ -21,26 +21,16 @@ class Signup extends React.Component {
         this.setState({[e.target.name]: e.target.value});
     }
     onSubmit(e){
-        this.setState({ errors: {}, isLoading: true});
+        this.setState({ isLoading: true });
         e.preventDefault();
-        this.props.userSignupRequest(this.state).then(response => {
-            if (response.status === 200){
-                response.json().then((res) => { 
-                    this.props.history.push('/login');
-                })
-            }
-            else{
-                response.json().then(
-                (res) => { 
-                    this.setState({errors: res, isLoading: false})
-                })                  
-            }
-        })
+        this.props.userSignupRequest(this.state, (isOk) => {
+            if (isOk) this.props.history.push('/login');
+            else this.setState({ isLoading: false });
+        });
     }
 
     render(){
-        const { errors } = this.state;
- 
+        const errors = this.props.errors;
         return (
             <form className="signup" onSubmit={this.onSubmit}>
                 <fieldset>
@@ -52,8 +42,8 @@ class Signup extends React.Component {
                     <input type="submit" value="Sign up" name="" disabled={this.state.isLoading}/>
                 </fieldset>
                 <div>
-                    {errors.email && <span>{errors.email}</span>}
-                    {errors.password && <span>{errors.password}</span>}
+                    {errors && errors.email && <span>{errors.email}</span>}
+                    {errors && errors.password && <span>{errors.password}</span>}
                 </div>
             </form>
         );
@@ -62,4 +52,4 @@ class Signup extends React.Component {
 
 
 
-export default connect( null, { userSignupRequest })(Signup);
+export default connect( state => ({ errors: state.errorsStore.errors }), { userSignupRequest })(Signup);

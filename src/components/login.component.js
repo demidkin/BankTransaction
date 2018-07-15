@@ -1,8 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux'
-import { saveData } from 'src/actions/saveData.action';
 import { auth } from 'src/actions/auth.action'
-import { saveToken } from 'src/actions/saveToken.action'
 import 'src/sass/login.component.scss'
 
 
@@ -13,8 +11,6 @@ class Login extends React.Component {
         this.state = {
             email: '',
             password: '',
-            token: '',
-            errors: [],
             isLoading: false
         }
         this.onChange = this.onChange.bind(this);
@@ -25,29 +21,18 @@ class Login extends React.Component {
         this.setState({[e.target.name]: e.target.value});
     }
     onSubmit(e){
-        this.setState({ errors: [], isLoading: true});
+        this.setState({ isLoading: true});
         e.preventDefault();
-        this.props.auth(this.state).then(response => {
-            if (response.status === 200){
-                response.json().then((res) => { 
-                    this.setState({token : res.token})
-                    this.props.saveToken({ userid: this.state.email, token: this.state.token });
-                    this.props.saveData({ type: 'LOGINED', payload: true });
-                    this.props.history.push('/');
-                })
+        this.props.auth(this.state, (isOk) => {
+            if (isOk) {
+                this.props.history.push('/');
             }
-            else{
-                response.json().then(
-                (res) => { 
-                    this.props.saveData({ type: 'LOGOUT', payload: false });
-                    this.setState({errors: res, isLoading: false})
-                })                  
-            }
-        })
+            else this.setState({ isLoading: false });
+        });
     }
 
     render(){
-        const { errors } = this.state;
+        const errors = this.props.errors;
 
         return (
             <form className="login" onSubmit={this.onSubmit}>
@@ -57,11 +42,11 @@ class Login extends React.Component {
                     <input type="email" id="login-input" name="email" onChange={this.onChange}/>
                     <label htmlFor="pasword-input">Password: </label>
                     <input type="password" id="pasword-input" name="password" onChange={this.onChange} /> 
-                    <input type="submit" value="Sign up" name="" disabled={this.state.isLoading}/>
+                    <input type="submit" value="Login" name="" disabled={this.state.isLoading}/>
                 </fieldset>
                 <div>
-                    {errors.email && <span>{errors.email}</span>}
-                    {errors.password && <span>{errors.password}</span>}
+                    {errors && errors.email && <span>{errors.email}</span>}
+                    {errors && errors.password && <span>{errors.password}</span>}
                 </div>
             </form>
         );
@@ -70,4 +55,4 @@ class Login extends React.Component {
 
 
 
-export default connect( null, { auth, saveToken, saveData })(Login);
+export default connect( state => ({ errors: state.errorsStore.errors }), { auth })(Login);

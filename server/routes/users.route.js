@@ -1,31 +1,11 @@
 import express from 'express';
-import Validator from 'validator';
-import isEmpty from 'lodash/isEmpty';
-import { users, emails } from '../data';
+import { users, emails, validatorInput, ValidatorType } from '../data';
 
 let router = express.Router();
 
-function validatorInput(data) {
-    let errors = {};
-
-    if (!data.email || Validator.isEmpty(data.email + '')){
-        errors.email = 'Email is required';
-    }
-    else if (!Validator.isEmail(data.email + '')){
-        errors.email = 'Email is invalid';
-    }
-    if (!data.password || Validator.isEmpty(data.password + '')){
-        errors.password = 'Password is required';
-    }
-    return { errors, isValid: isEmpty(errors)};
-}
-
-// const emails = [];
-// const users = [];
-
 router.post('/', (req, res) => {
     setTimeout(()=> {
-        const { errors, isValid } = validatorInput(req.body);
+        const { errors, isValid } = validatorInput(req.body, ValidatorType.SIGNUP);
         if (isValid) {
             const { email, password } = req.body;
             if (emails.indexOf(email) === -1){

@@ -1,7 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { loadBanks } from 'src/actions/loadBanks.action';
-import { saveBanksToStor } from 'src/actions/saveBanksToStor.action';
+import { updateBankList } from 'src/actions/updateBankList.action';
 import { addTransaction } from 'src/actions/addTransaction.action';
 import 'src/sass/transactions-add.component.scss'
 
@@ -25,46 +24,46 @@ class TransactionAdd extends React.Component {
     }
 
     componentWillMount(){
-        const userid = this.props.store.tokenStore.userid;
-        const token = this.props.store.tokenStore.token;
-        this.props.store.banksStore[0] = undefined;
+        // const userid = this.props.store.tokenStore.userid;
+        // const token = this.props.store.tokenStore.token;
+        // this.props.store.banksStore[0] = undefined;
 
-        if ( token !== null &&  userid !== null )
-            this.props.loadBanks({ userId: userid, token: token}).then(response => {
-                if (response.status === 200){
-                    response.json().then((res) => { 
-                        this.props.saveBanksToStor(res);
-                        this.setState({bankId: this.props.store.banksStore.banks[0].id});
-                    })
-                }
-                else{
-                    response.json().then(
-                    (res) => { 
-                        this.setState({ errors : res })
-                    })                  
-                }
-            })
+        // if ( token !== null &&  userid !== null )
+        //     this.props.loadBanks({ userId: userid, token: token}).then(response => {
+        //         if (response.status === 200){
+        //             response.json().then((res) => { 
+        //                 this.props.saveBanksToStor(res);
+        //                 this.setState({bankId: this.props.store.banksStore.banks[0].id});
+        //             })
+        //         }
+        //         else{
+        //             response.json().then(
+        //             (res) => { 
+        //                 this.setState({ errors : res })
+        //             })                  
+        //         }
+        //     })
     }
 
     onSubmit(e){
-        const userid = this.props.store.tokenStore.userid;
-        const token = this.props.store.tokenStore.token;
+        // const userid = this.props.store.tokenStore.userid;
+        // const token = this.props.store.tokenStore.token;
 
-        this.setState({ errors: {}, isLoading: true});
-        e.preventDefault();
-        this.props.addTransaction({ userId: userid, token: token, ammount: this.state.ammount, bankId: this.state.bankId }).then(response => {
-            if (response.status === 200){
-                response.json().then((res) => { 
-                    this.props.history.push('/transactions');
-                })
-            }
-            else{
-                response.json().then(
-                (res) => { 
-                    this.setState({errors: res, isLoading: false})
-                })                  
-            }
-        })
+        // this.setState({ errors: {}, isLoading: true});
+        // e.preventDefault();
+        // this.props.addTransaction({ userId: userid, token: token, ammount: this.state.ammount, bankId: this.state.bankId }).then(response => {
+        //     if (response.status === 200){
+        //         response.json().then((res) => { 
+        //             this.props.history.push('/transactions');
+        //         })
+        //     }
+        //     else{
+        //         response.json().then(
+        //         (res) => { 
+        //             this.setState({errors: res, isLoading: false})
+        //         })                  
+        //     }
+        // })
     }
 
     render(){
@@ -105,4 +104,4 @@ class BankSelect extends React.Component {
     } 
 }
 
-export default connect( state => ({ store: state }), { loadBanks, saveBanksToStor, addTransaction })(TransactionAdd);
+export default connect( state => ({ store: state }), { updateBankList, addTransaction })(TransactionAdd);

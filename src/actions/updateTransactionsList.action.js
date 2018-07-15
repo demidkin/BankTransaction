@@ -1,7 +1,7 @@
 
 import { post } from 'src/actions/ajax'
 
-export function loadTransactions (userData) {
+export function updateTransactionsList (userData) {
     return dispatch => {
         const response = post('http://localhost:3000/api/getTransactions', userData)
         .then(response => {
