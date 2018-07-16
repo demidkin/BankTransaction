@@ -1,4 +1,4 @@
-import { logoutToken, errorsClear, transactionsClear, errorsAdd } from 'src/actions/actions';
+import { logoutToken, errorsClear, transactionsClear, errorsAdd, banksClear } from 'src/actions/actions';
 
 
 import { post } from 'src/actions/ajax'
