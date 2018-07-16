@@ -1,3 +1,5 @@
+import { logoutToken, errorsClear, transactionsClear, errorsAdd } from 'src/actions/actions';
+
 
 import { post } from 'src/actions/ajax'
 
@@ -6,16 +8,16 @@ export function logout (userData) {
         return post('http://localhost:3000/api/logout', userData).then(response => {
             if (response.status === 200){
                 response.json().then((res) => {
-                    dispatch({ type: 'LOGOUT', payload: {} });
-                    dispatch({ type: 'TRANSACTION_CLEAR', payload: {} });
-                    dispatch({ type: 'BANKS_CLEAR', payload: {} });
-                    dispatch({ type: 'ERRORS', payload: {} });
+                    dispatch(logoutToken());
+                    dispatch(transactionsClear());
+                    dispatch(banksClear());
+                    dispatch(errorsClear());
                 })
             }
             else{
                 response.json().then(
                 (err) => { 
-                    dispatch({ type : 'ERRORS', payload : err });
+                    dispatch(errorsAdd(err));
                 })                  
             }
         })

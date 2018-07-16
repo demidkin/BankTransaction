@@ -1,5 +1,6 @@
 
 import { post } from 'src/actions/ajax';
+import { errorsClear, errorsAdd, banksLoaded} from 'src/actions/actions';
 
 export function updateBankList (userData) {
     return dispatch => {
@@ -7,14 +8,14 @@ export function updateBankList (userData) {
         .then(response => {
             if (response.status === 200){
                 response.json().then((res) => { 
-                    dispatch({ type: 'BANKS_LOADED', payload: res });
-                    dispatch({ type: 'ERRORS', payload: {} });
+                    dispatch(banksLoaded(res));
+                    dispatch(errorsClear());
                 })
             }
             else{
                 response.json().then(
                 (err) => { 
-                    dispatch({type: 'ERRORS', payload: err }) 
+                    dispatch(errorsAdd(err)) 
                 })                  
             }
         })

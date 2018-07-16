@@ -1,20 +1,22 @@
 
 import { post } from 'src/actions/ajax'
+import { errorsClear, errorsAdd, transactionsLoaded } from 'src/actions/actions';
+
 
 export function updateTransactionsList (userData) {
     return dispatch => {
-        const response = post('http://localhost:3000/api/getTransactions', userData)
+        return post('http://localhost:3000/api/getTransactions', userData)
         .then(response => {
             if (response.status === 200){
                 response.json().then((res) => { 
-                    dispatch({ type: 'TRANSACTION_LOADED', payload: res });
-                    dispatch({ type: 'ERRORS', payload: {} });
+                    dispatch(transactionsLoaded(res));
+                    dispatch(errorsClear());
                 })
             }
             else{
                 response.json().then(
                 (err) => { 
-                    dispatch({type: 'ERRORS', payload: err }) 
+                    dispatch(errorsAdd(err)) 
                 })                  
             }
         })

@@ -1,3 +1,5 @@
+import { tokenLoad } from 'src/actions/actions';
+
 export const loadToken = () => dispatch => {
-    dispatch({type: 'LOAD_TOKEN', payload: ''});
+    dispatch(tokenLoad());
 }

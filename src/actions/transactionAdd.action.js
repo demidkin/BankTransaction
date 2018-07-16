@@ -1,5 +1,6 @@
 
 import { post } from 'src/actions/ajax'
+import { errorsClear, errorsAdd } from 'src/actions/actions';
 
 export function transactionAdd (userData, callback) {
     return dispatch => {
@@ -7,14 +8,14 @@ export function transactionAdd (userData, callback) {
         .then(response => {
             if (response.status === 200){
                 response.json().then((res) => { 
-                    dispatch({ type: 'ERRORS', payload: {} });
+                    dispatch(errorsClear());
                     callback(true);
                 })
             }
             else{
                 response.json().then(
                 (err) => { 
-                    dispatch({type: 'ERRORS', payload: err });
+                    dispatch(errorsAdd(err));
                     callback(false);
                 })                  
             }
