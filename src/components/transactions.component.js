@@ -25,7 +25,8 @@ class Transactions extends React.Component {
         this.state = {
             modalIsOpen: false,
             ammount : '',
-            bankId : ''
+            bankId : '',
+            isLoading: false
         };
 
         this.openModal = this.openModal.bind(this);
@@ -58,11 +59,13 @@ class Transactions extends React.Component {
     }
 
     onSubmit(e) {
+        this.setState({ isLoading: true });
         this.props.transactionAdd({ token: this.props.token, ammount: this.state.ammount, bankId: this.state.bankId }, (isOk) => {
             if (isOk){
                 this.setState({ modalIsOpen: false });
-                this.props.updateTransactionsList({ token: this.props.token });
+                this.props.updateTransactionsList({ token: this.props.token });    
             }
+            this.setState({ isLoading: false });
         });
     }
 
@@ -89,7 +92,7 @@ class Transactions extends React.Component {
                             <select name="bankId" size="1" onChange={this.onChange}>
                                 {Banks}
                             </select>
-                            <button onClick={this.onSubmit}>Add transaction</button>
+                            <button onClick={this.onSubmit} disabled={this.state.isLoading}>Add transaction</button>
                             <div>
                                 {errors && errors.ammount && <span>{errors.ammount}</span>}
                                 {errors && errors.bankId && <span>{errors.bankId}</span>}
