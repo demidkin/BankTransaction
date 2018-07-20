@@ -1,4 +1,17 @@
-import { TRANSACTION_CLEAR, TRANSACTION_LOADED } from 'src/actions/actions';
+// action types
+
+export const TRANSACTION_CLEAR = 'TRANSACTION_CLEAR';
+export const TRANSACTION_LOADED = 'TRANSACTION_LOADED';
+
+// action creators
+
+export function transactionsClear() {
+    return { type: TRANSACTION_CLEAR }
+}
+
+export function transactionsLoaded(transactions) {
+    return { type: TRANSACTION_LOADED, payload: transactions }
+}
 
 export default function transactionStore(state = [], action = {}){
     if (action.type === TRANSACTION_LOADED){

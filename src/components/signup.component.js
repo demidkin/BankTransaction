@@ -49,4 +49,4 @@ class Signup extends React.Component {
     } 
 }
 
-export default connect( state => ({ errors: state.errorsStore.errors }), { userSignupRequest })(Signup);
+export default connect( store => ({ errors: store.errorsStore.errors }), { userSignupRequest })(Signup);

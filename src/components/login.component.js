@@ -52,4 +52,4 @@ class Login extends React.Component {
     } 
 }
 
-export default connect( state => ({ errors: state.errorsStore.errors }), { auth })(Login);
+export default connect( store => ({ errors: store.errorsStore.errors }), { auth })(Login);

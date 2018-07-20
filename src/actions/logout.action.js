@@ -1,6 +1,7 @@
-import { logoutToken, errorsClear, transactionsClear, errorsAdd, banksClear } from 'src/actions/actions';
-
-
+import { errorsAdd, errorsClear } from 'src/reducers/errors.reducer';
+import { logoutToken } from 'src/reducers/token.reducer';
+import { transactionsClear } from 'src/reducers/transactions.reducer';
+import { banksClear } from 'src/reducers/banks.reducer';
 import { post } from 'src/actions/ajax'
 
 export function logout (userData) {

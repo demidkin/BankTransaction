@@ -1,6 +1,8 @@
 
 import { post } from 'src/actions/ajax'
-import { errorsClear, errorsAdd, transactionsLoaded } from 'src/actions/actions';
+import { errorsAdd, errorsClear } from 'src/reducers/errors.reducer';
+import { transactionsLoaded } from 'src/reducers/transactions.reducer';
+
 
 
 export function updateTransactionsList (userData) {

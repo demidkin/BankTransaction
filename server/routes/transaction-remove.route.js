@@ -1,15 +1,17 @@
 import express from 'express';
-import { tokens, transactions, removeTransaction, isValidToken, validatorInput, ValidatorType } from '../data';
-//import Transaction from '../src/classes/transaction.class';
+import { removeTransaction, validatorInput } from '../data';
 
 let router = express.Router();
 
 router.post('/', (req, res) => {
-    const { errors, isValid } = validatorInput(req.body, ValidatorType.REMOVE_TRANCATION);
+    const validator = {
+        token: true,
+        transactionId: true,
+    }
+    const { errors, isValid } = validatorInput(req.body, validator);
     if (isValid) {
         const { transactionId } = req.body;
         removeTransaction(transactionId);
-        console.log('Transaction remove: ', transactions);
         res.json({succsess : true});
     } else {
         console.log(errors);

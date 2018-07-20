@@ -1,5 +1,6 @@
 import { post } from 'src/actions/ajax';
-import { errorsClear, errorsAdd } from 'src/actions/actions';
+import { errorsAdd, errorsClear } from 'src/reducers/errors.reducer';
+
 
 export function userSignupRequest (userData, callback) {
     return dispatch => {

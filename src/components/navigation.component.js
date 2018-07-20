@@ -31,4 +31,4 @@ class Navigation extends React.Component {
     } 
 }
 
-export default connect( state => ({ token: state.tokenStore.token }), { logout })(Navigation);
+export default connect( store => ({ token: store.tokenStore.token }), { logout })(Navigation);

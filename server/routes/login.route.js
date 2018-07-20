@@ -1,11 +1,15 @@
 import express from 'express';
 import bcrypt from 'bcryptjs';
-import { users, emails, tokens, logoutUserByEmail, validatorInput, ValidatorType } from '../data';
+import { users, emails, tokens, logoutUserByEmail, validatorInput } from '../data';
 
 let router = express.Router();
 
 router.post('/', (req, res) => {
-    const { errors, isValid } = validatorInput(req.body, ValidatorType.LOGIN);
+    const validator = {
+        email: true,
+        password : true
+    }
+    const { errors, isValid } = validatorInput(req.body, validator);
     if (isValid) {
         const { email, password } = req.body;
         const userId = emails.indexOf(email);

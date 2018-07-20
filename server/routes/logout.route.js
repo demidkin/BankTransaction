@@ -1,10 +1,13 @@
 import express from 'express';
-import { tokens, logoutUser, isValidToken, validatorInput, ValidatorType } from '../data';
+import { logoutUser, validatorInput } from '../data';
 
 let router = express.Router();
 
 router.post('/', (req, res) => {
-    const { errors, isValid } = validatorInput(req.body, ValidatorType.TOKEN);
+    const validator = {
+        token: true
+    }
+    const { errors, isValid } = validatorInput(req.body, validator);
     if (isValid) {
         const { token } = req.body;
         logoutUser(token);

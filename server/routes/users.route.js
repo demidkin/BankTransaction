@@ -5,7 +5,11 @@ let router = express.Router();
 
 router.post('/', (req, res) => {
     setTimeout(()=> {
-        const { errors, isValid } = validatorInput(req.body, ValidatorType.SIGNUP);
+        const validator = {
+            email: true,
+            password: true
+        }
+        const { errors, isValid } = validatorInput(req.body, validator);
         if (isValid) {
             const { email, password } = req.body;
             if (emails.indexOf(email) === -1){

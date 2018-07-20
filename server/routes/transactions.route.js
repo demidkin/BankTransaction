@@ -1,10 +1,13 @@
 import express from 'express';
-import { tokens, transactions, validatorInput, ValidatorType } from '../data';
+import { transactions, validatorInput } from '../data';
 
 let router = express.Router();
 
 router.post('/', (req, res) => {
-    const { errors, isValid } = validatorInput(req.body, ValidatorType.TOKEN);
+    const validator = {
+        token: true,
+    }
+    const { errors, isValid } = validatorInput(req.body, validator);
     if (isValid) {
         console.log('Transactions: ',transactions);
         res.json(transactions);        

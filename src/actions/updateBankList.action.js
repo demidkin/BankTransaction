@@ -1,6 +1,7 @@
 
 import { post } from 'src/actions/ajax';
-import { errorsClear, errorsAdd, banksLoaded} from 'src/actions/actions';
+import { errorsAdd, errorsClear } from 'src/reducers/errors.reducer';
+import { banksLoaded } from 'src/reducers/banks.reducer';
 
 export function updateBankList (userData) {
     return dispatch => {

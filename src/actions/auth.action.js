@@ -1,5 +1,6 @@
 import { post } from 'src/actions/ajax'
-import { errorsAdd, errorsClear, tokenNew } from 'src/actions/actions';
+import { errorsAdd, errorsClear } from 'src/reducers/errors.reducer';
+import { tokenNew } from 'src/reducers/token.reducer';
 
 export function auth (userData, callback) {
     return dispatch => {
